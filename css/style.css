@@ -1,0 +1,120 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 0;
+}
+
+.buscador-container {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.buscador-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+#buscador {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 14px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+#buscador:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+/* Tabla */
+#tablaUsuarios {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#tablaUsuarios th {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+}
+
+#tablaUsuarios td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+#tablaUsuarios tbody tr {
+  transition: background-color 0.2s;
+}
+
+#tablaUsuarios tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Fila resaltada */
+.fila-resaltada {
+  background-color: #fff3cd;
+}
+
+.fila-resaltada:hover {
+  background-color: #ffe69c;
+}
+
+/* Resaltado */
+.resaltado {
+  background-color: #ffeb3b;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* Boton eliminar */
+.btn-eliminar {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  display: block;
+  margin: 0 auto;
+}
+
+.btn-eliminar:hover {
+  background-color: #d32f2f;
+}
+
+/* Agrega un borde negro al hacer focus en el botón eliminar para mejorar la experiencia de usuario al hacer click en el botón */
+.btn-eliminar:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #tablaUsuarios {
+    font-size: 12px;
+  }
+  
+  #tablaUsuarios th,
+  #tablaUsuarios td {
+    padding: 8px;
+  }
+  
+  #buscador {
+    max-width: 50%;
+  }
+}

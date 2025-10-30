@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <h1>Tabla de usuarios registrados</h1>
 
-  <table border="1">
-    <tr>
-      <th>Nombre</th>
-      <th>Apellidos</th>
-      <th>Teléfono</th>
-      <th>Email</th>
-      <th>Sexo</th>
-    </tr>
-    <tr>
-      <td>José</td>
-      <td>Antonio García</td>
-      <td>123456789</td>
-      <td>jose@example.com</td>
-      <td>Hombre</td>
-    </tr>
+  <div class="buscador-container">
+    <label for="buscador">Buscar usuario:</label>
+    <input type="text" id="buscador" placeholder="Buscar por nombre o apellido...">
+  </div>
+
+  <table border="1" id="tablaUsuarios">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>Sexo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Las filas se generarán dinámicamente con JavaScript -->
+    </tbody>
   </table>
 
   <hr>
@@ -33,5 +38,7 @@
     <li><a href="curiosidades.html">Curiosidades</a></li>
     <li><a href="contacto.html">Contacto</a></li>
   </ul>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
