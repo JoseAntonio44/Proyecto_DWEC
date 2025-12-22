@@ -4,24 +4,33 @@ require_once __DIR__ . '/../interfaces/IToJson.php';
 
 class User implements IToJson
 {
+    private $id;
     private $nombre;
     private $apellidos;
     private $password;
     private $telefono;
     private $email;
     private $sexo;
+    private $fecha_nacimiento;
 
-    public function __construct($nombre, $apellidos, $password, $telefono, $email, $sexo)
+    public function __construct($nombre = null, $apellidos = null, $password = null, $telefono = null, $email = null, $sexo = null, $fecha_nacimiento = null, $id = null)
     {
+        $this->id = $id;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
         $this->password = $password;
         $this->telefono = $telefono;
         $this->email = $email;
         $this->sexo = $sexo;
+        $this->fecha_nacimiento = $fecha_nacimiento;
     }
 
-    //Getters
+    // Getters
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getNombre()
     {
         return $this->nombre;
@@ -52,7 +61,17 @@ class User implements IToJson
         return $this->sexo;
     }
 
-    //Setters
+    public function getFechaNacimiento()
+    {
+        return $this->fecha_nacimiento;
+    }
+
+    // Setters
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
@@ -83,18 +102,52 @@ class User implements IToJson
         $this->sexo = $sexo;
     }
 
-    //Implementacion del metodo de la interfaz IToJson
+    public function setFechaNacimiento($fecha_nacimiento)
+    {
+        $this->fecha_nacimiento = $fecha_nacimiento;
+    }
+
     public function toJson()
     {
         $data = [
+            'id' => $this->id,
             'nombre' => $this->nombre,
             'apellidos' => $this->apellidos,
             'password' => $this->password,
             'telefono' => $this->telefono,
             'email' => $this->email,
-            'sexo' => $this->sexo
+            'sexo' => $this->sexo,
+            'fecha_nacimiento' => $this->fecha_nacimiento
         ];
 
         return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'nombre' => $this->nombre,
+            'apellidos' => $this->apellidos,
+            'password' => $this->password,
+            'telefono' => $this->telefono,
+            'email' => $this->email,
+            'sexo' => $this->sexo,
+            'fecha_nacimiento' => $this->fecha_nacimiento
+        ];
+    }
+
+    public static function fromArray($data)
+    {
+        return new User(
+            $data['nombre'] ?? null,
+            $data['apellidos'] ?? null,
+            $data['password'] ?? null,
+            $data['telefono'] ?? null,
+            $data['email'] ?? null,
+            $data['sexo'] ?? null,
+            $data['fecha_nacimiento'] ?? null,
+            $data['id'] ?? null
+        );
     }
 }

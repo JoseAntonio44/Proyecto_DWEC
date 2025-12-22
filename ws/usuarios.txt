@@ -1,0 +1,18 @@
+[{
+    "nombre": "Jose",
+    "apellidos": "Antonio",
+    "password": "1234",
+    "telefono": "123123123",
+    "email": "josantgar44@gmail.com",
+    "sexo": "hombre"
+}
+,
+{
+    "nombre": "Pepe",
+    "apellidos": "Garcia",
+    "password": "1234",
+    "telefono": "123123123",
+    "email": "student1@example.com",
+    "sexo": "hombre"
+}
+]
