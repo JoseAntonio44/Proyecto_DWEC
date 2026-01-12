@@ -9,6 +9,25 @@
 <body>
   <h1>Tabla de usuarios registrados</h1>
 
+  <div id="formularioEdicion" style="display:none;">
+    <h3>Editar Usuario</h3>
+    <form id="formEditar">
+      <input type="text" id="editNombre" placeholder="Nombre" required>
+      <input type="text" id="editApellidos" placeholder="Apellidos" required>
+      <input type="tel" id="editTelefono" placeholder="Teléfono" required>
+      <input type="email" id="editEmail" placeholder="Email" required>
+      <select id="editSexo" required>
+        <option value="">Selecciona sexo</option>
+        <option value="Hombre">Hombre</option>
+        <option value="Mujer">Mujer</option>
+      </select>
+      <div style="margin-top: 15px;">
+        <button type="submit" class="btn-guardar">Guardar</button>
+        <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
   <div class="buscador-container">
     <label for="buscador">Buscar usuario:</label>
     <input type="text" id="buscador" placeholder="Buscar por nombre o apellido...">
@@ -30,15 +49,7 @@
     </tbody>
   </table>
 
-  <hr>
-  <ul>
-    <li><a href="index.html">Inicio</a></li>
-    <li><a href="formulario.html">Formulario</a></li>
-    <li><a href="tabla.html">Tabla</a></li>
-    <li><a href="curiosidades.html">Curiosidades</a></li>
-    <li><a href="contacto.html">Contacto</a></li>
-  </ul>
-
+  <script src="js/nav.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
