@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Alumnos</title>
+    <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 min-h-screen">
+
+    <!-- Navegación -->
+    <nav class="bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-800 dark:to-purple-800 p-4 shadow-lg">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-white text-2xl font-bold mb-2 md:mb-0 flex items-center">
+                <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                </svg>
+                Gestión de Alumnos
+            </h1>
+            <div class="flex flex-wrap gap-2 items-center">
+                <a href="index.html" class="text-white hover:bg-white/20 px-4 py-2 rounded-full">Inicio</a>
+                <a href="tabla.html" class="bg-white text-indigo-600 px-4 py-2 rounded-full font-medium hover:bg-indigo-100">Tabla</a>
+                <a href="formulario.html" class="text-white hover:bg-white/20 px-4 py-2 rounded-full">Formulario</a>
+                <a href="../curiosidades.html" class="text-white hover:bg-white/20 px-4 py-2 rounded-full">Curiosidades</a>
+                <a href="../contacto.html" class="text-white hover:bg-white/20 px-4 py-2 rounded-full">Contacto</a>
+                <button id="btnModo" class="bg-amber-400 text-slate-800 px-4 py-2 rounded-full hover:bg-amber-300 ml-2 flex items-center font-medium">
+                    <svg class="w-5 h-5 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                    Oscuro
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="max-w-5xl mx-auto p-6">
+        <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-6 flex items-center">
+            <svg class="w-7 h-7 mr-2 text-indigo-600 dark:text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z"/>
+            </svg>
+            Tabla de Alumnos
+        </h2>
+
+        <!-- Formulario de edición (oculto por defecto) -->
+        <div id="formularioEdicion" class="hidden bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 mb-6 border border-slate-200 dark:border-slate-700">
+            <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                </svg>
+                Editar Alumno
+            </h3>
+            <form id="formEditar" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="editNombre" placeholder="Nombre" required
+                    class="p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                <input type="text" id="editApellidos" placeholder="Apellidos" required
+                    class="p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                <input type="tel" id="editTelefono" placeholder="Teléfono" required
+                    class="p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                <input type="email" id="editEmail" placeholder="Email" required
+                    class="p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                <select id="editSexo" required
+                    class="p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                    <option value="">Selecciona sexo</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                </select>
+                <div class="flex gap-2">
+                    <button type="submit" class="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600 font-medium">
+                        Guardar
+                    </button>
+                    <button type="button" id="btnCancelar" class="bg-slate-500 text-white px-6 py-2 rounded-lg hover:bg-slate-600 font-medium">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Buscador -->
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-4 mb-6 border border-slate-200 dark:border-slate-700">
+            <label class="text-slate-700 dark:text-slate-300 mb-2 font-bold flex items-center">
+                <svg class="w-5 h-5 mr-2 text-indigo-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                </svg>
+                Buscar alumno:
+            </label>
+            <input type="text" id="buscador" placeholder="Buscar por nombre o apellido..."
+                class="w-full p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+        </div>
+
+        <!-- Tabla -->
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden border border-slate-200 dark:border-slate-700">
+            <table id="tablaUsuarios" class="w-full">
+                <thead class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
+                    <tr>
+                        <th class="p-4 text-left font-semibold">Nombre</th>
+                        <th class="p-4 text-left font-semibold">Apellidos</th>
+                        <th class="p-4 text-left font-semibold">Teléfono</th>
+                        <th class="p-4 text-left font-semibold">Email</th>
+                        <th class="p-4 text-left font-semibold">Sexo</th>
+                        <th class="p-4 text-left font-semibold">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-slate-700 dark:text-slate-300">
+                    <!-- Las filas se generan con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="js/darkmode.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

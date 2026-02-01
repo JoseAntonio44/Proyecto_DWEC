@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 min-h-screen">
+
+    <!-- Navegación -->
+    <nav class="bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-800 dark:to-purple-800 p-4 shadow-lg">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-white text-2xl font-bold mb-2 md:mb-0 flex items-center">
+                <svg class="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                </svg>
+                Gestión de Alumnos
+            </h1>
+            <div class="flex flex-wrap gap-2 items-center">
+                <a href="index.html" class="text-white hover:bg-white/20 px-4 py-2 rounded-full">Inicio</a>
+                <a href="tabla.html" class="text-white hover:bg-white/20 px-4 py-2 rounded-full">Tabla</a>
+                <a href="formulario.html" class="bg-white text-indigo-600 px-4 py-2 rounded-full font-medium hover:bg-indigo-100">Formulario</a>
+                <a href="../curiosidades.html" class="text-white hover:bg-white/20 px-4 py-2 rounded-full">Curiosidades</a>
+                <a href="../contacto.html" class="text-white hover:bg-white/20 px-4 py-2 rounded-full">Contacto</a>
+                <button id="btnModo" class="bg-amber-400 text-slate-800 px-4 py-2 rounded-full hover:bg-amber-300 ml-2 flex items-center font-medium">
+                    <svg class="w-5 h-5 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                    Oscuro
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="max-w-5xl mx-auto p-6">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-6">Formulario de Registro</h2>
+
+            <form action="../ws/crearUsuario.php" method="POST" class="space-y-4">
+                <!-- Nombre -->
+                <div>
+                    <label class="block text-slate-700 dark:text-slate-300 font-bold mb-2">Nombre:</label>
+                    <input type="text" name="nombre" required
+                        class="w-full p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+
+                <!-- Apellidos -->
+                <div>
+                    <label class="block text-slate-700 dark:text-slate-300 font-bold mb-2">Apellidos:</label>
+                    <input type="text" name="apellidos" required
+                        class="w-full p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+
+                <!-- Contraseña -->
+                <div>
+                    <label class="block text-slate-700 dark:text-slate-300 font-bold mb-2">Contraseña:</label>
+                    <input type="password" name="password" required
+                        class="w-full p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+
+                <!-- Teléfono -->
+                <div>
+                    <label class="block text-slate-700 dark:text-slate-300 font-bold mb-2">Teléfono:</label>
+                    <input type="tel" name="telefono" required
+                        class="w-full p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-slate-700 dark:text-slate-300 font-bold mb-2">Email:</label>
+                    <input type="email" name="email" required
+                        class="w-full p-3 border border-slate-300 rounded-lg dark:bg-slate-700 dark:text-white dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+
+                <!-- Sexo -->
+                <div>
+                    <label class="block text-slate-700 dark:text-slate-300 font-bold mb-2">Sexo:</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center text-slate-700 dark:text-slate-300">
+                            <input type="radio" name="sexo" value="hombre" class="mr-2"> Hombre
+                        </label>
+                        <label class="flex items-center text-slate-700 dark:text-slate-300">
+                            <input type="radio" name="sexo" value="mujer" class="mr-2"> Mujer
+                        </label>
+                        <label class="flex items-center text-slate-700 dark:text-slate-300">
+                            <input type="radio" name="sexo" value="otro" class="mr-2"> Otro
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Botón enviar -->
+                <div class="pt-4">
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold py-3 px-6 rounded-lg hover:from-emerald-600 hover:to-emerald-700 shadow-lg">
+                        Registrar Alumno
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/darkmode.js"></script>
+</body>
+</html>
