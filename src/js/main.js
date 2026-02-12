@@ -1,17 +1,28 @@
-// Datos de ejemplo de los alumnos
-const usuarios = [
-    { nombre: "José", apellidos: "Antonio García", telefono: "612345678", email: "jose@example.com", sexo: "Hombre" },
-    { nombre: "Ana", apellidos: "López Martínez", telefono: "698765432", email: "ana@gmail.com", sexo: "Mujer" },
-    { nombre: "Laura", apellidos: "Martínez Pérez", telefono: "677112233", email: "laura@gmail.com", sexo: "Mujer" },
-    { nombre: "Carlos", apellidos: "García Sánchez", telefono: "655998877", email: "carlos@hotmail.com", sexo: "Hombre" },
-    { nombre: "María", apellidos: "Rodríguez López", telefono: "644556677", email: "maria@yahoo.com", sexo: "Mujer" },
-    { nombre: "Pedro", apellidos: "Fernández García", telefono: "633445566", email: "pedro@outlook.com", sexo: "Hombre" },
-    { nombre: "Lucía", apellidos: "González Ruiz", telefono: "622334455", email: "lucia@gmail.com", sexo: "Mujer" },
-    { nombre: "Javier", apellidos: "Sánchez Moreno", telefono: "611223344", email: "javier@example.com", sexo: "Hombre" }
-];
+// Array de usuarios cargados desde el servidor
+let usuarios = [];
 
 // Guarda el índice del usuario que se está editando
 let indiceEdicion = -1;
+
+// URL base de la API
+const API_BASE = "../ws";
+
+// Carga usuarios desde el servidor mediante fetch
+async function cargarUsuariosDesdeServidor() {
+    try {
+        const response = await fetch(`${API_BASE}/getUsuario.php`);
+        const resultado = await response.json();
+
+        if (resultado.success) {
+            usuarios = resultado.data;
+            cargarTabla(usuarios);
+        } else {
+            Swal.fire("Error", "No se pudieron cargar los usuarios: " + resultado.message, "error");
+        }
+    } catch (error) {
+        Swal.fire("Error", "Error de conexión con el servidor", "error");
+    }
+}
 
 // Carga la tabla con los datos
 function cargarTabla(datos) {
@@ -20,16 +31,16 @@ function cargarTabla(datos) {
 
     datos.forEach((user, index) => {
         const fila = document.createElement("tr");
-        // Añade clases de Tailwind para las filas
         fila.className = "border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700";
 
-        // Crea celdas para cada campo del usuario
-        for (const valor of Object.values(user)) {
+        // Campos a mostrar en la tabla
+        const campos = ["nombre", "apellidos", "telefono", "email", "sexo"];
+        campos.forEach(campo => {
             const celda = document.createElement("td");
             celda.className = "p-4";
-            celda.textContent = valor;
+            celda.textContent = user[campo] || "";
             fila.appendChild(celda);
-        }
+        });
 
         // Celda de acciones con botones
         const celdaAcciones = document.createElement("td");
@@ -76,12 +87,11 @@ function cargarTablaConResaltado(datos, textoBusqueda) {
         fila.className = "border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700";
         let hayCoincidencia = false;
 
-        // Crea celdas para cada campo
-        const campos = Object.values(user);
-        campos.forEach((valor, i) => {
+        const campos = ["nombre", "apellidos", "telefono", "email", "sexo"];
+        campos.forEach((campo, i) => {
             const celda = document.createElement("td");
             celda.className = "p-4";
-            celda.textContent = valor;
+            celda.textContent = user[campo] || "";
 
             // Resalta solo en nombre y apellidos (índices 0 y 1)
             if (i < 2 && textoBusqueda.length >= 2) {
@@ -141,42 +151,90 @@ function ocultarFormularioEdicion() {
     indiceEdicion = -1;
 }
 
-// Elimina un usuario
-function eliminarUsuario(index) {
-    usuarios.splice(index, 1);
-    cargarTabla(usuarios);
+// Elimina un usuario con confirmación SweetAlert2 y llamada asíncrona
+async function eliminarUsuario(index) {
+    const user = usuarios[index];
+
+    const confirmacion = await Swal.fire({
+        title: "¿Estás seguro?",
+        text: `Se eliminará a ${user.nombre} ${user.apellidos}`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#e11d48",
+        cancelButtonColor: "#64748b",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+    });
+
+    if (!confirmacion.isConfirmed) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/deleteUsuario.php?id=${user.id}`);
+        const resultado = await response.json();
+
+        if (resultado.success) {
+            Swal.fire("Eliminado", resultado.message, "success");
+            await cargarUsuariosDesdeServidor();
+        } else {
+            Swal.fire("Error", resultado.message, "error");
+        }
+    } catch (error) {
+        Swal.fire("Error", "Error de conexión con el servidor", "error");
+    }
 }
 
-// Guarda los cambios
-function guardarCambios(e) {
+// Guarda los cambios con confirmación SweetAlert2 y llamada asíncrona
+async function guardarCambios(e) {
     e.preventDefault();
 
     if (indiceEdicion === -1) return;
 
-    // Obtiene los valores del formulario
-    const nombre = document.getElementById("editNombre").value.trim();
-    const apellidos = document.getElementById("editApellidos").value.trim();
-    const telefono = document.getElementById("editTelefono").value.trim();
-    const email = document.getElementById("editEmail").value.trim();
-    const sexo = document.getElementById("editSexo").value;
+    const confirmacion = await Swal.fire({
+        title: "¿Guardar cambios?",
+        text: "Se actualizarán los datos del usuario",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#10b981",
+        cancelButtonColor: "#64748b",
+        confirmButtonText: "Sí, guardar",
+        cancelButtonText: "Cancelar"
+    });
 
-    // Actualiza el usuario en el array
-    usuarios[indiceEdicion] = {
-        nombre: nombre,
-        apellidos: apellidos,
-        telefono: telefono,
-        email: email,
-        sexo: sexo
-    };
+    if (!confirmacion.isConfirmed) return;
 
-    // Recarga la tabla y oculta formulario
-    cargarTabla(usuarios);
-    ocultarFormularioEdicion();
+    const user = usuarios[indiceEdicion];
+
+    // Crea FormData con los valores del formulario
+    const formData = new FormData();
+    formData.append("nombre", document.getElementById("editNombre").value.trim());
+    formData.append("apellidos", document.getElementById("editApellidos").value.trim());
+    formData.append("telefono", document.getElementById("editTelefono").value.trim());
+    formData.append("email", document.getElementById("editEmail").value.trim());
+    formData.append("sexo", document.getElementById("editSexo").value);
+
+    try {
+        const response = await fetch(`${API_BASE}/modificarUsuario.php?id=${user.id}`, {
+            method: "POST",
+            body: formData
+        });
+        const resultado = await response.json();
+
+        if (resultado.success) {
+            Swal.fire("Actualizado", resultado.message, "success");
+            ocultarFormularioEdicion();
+            await cargarUsuariosDesdeServidor();
+        } else {
+            Swal.fire("Error", resultado.message, "error");
+        }
+    } catch (error) {
+        Swal.fire("Error", "Error de conexión con el servidor", "error");
+    }
 }
 
 // Se ejecuta cuando se carga la página
 window.onload = () => {
-    cargarTabla(usuarios);
+    // Carga usuarios desde el servidor
+    cargarUsuariosDesdeServidor();
 
     // Evento del buscador
     const buscador = document.getElementById("buscador");
